@@ -1,0 +1,16 @@
+header {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.logo {
+  text-transform: uppercase;
+  color: rgb(255, 0, 0);
+}
+
+nav button {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}

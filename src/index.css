@@ -1,8 +1,13 @@
 header {
+  width: 100%;
+  top: 0;
+  left: 0;
   background-color: black;
   display: flex;
   justify-content: space-between;
   padding: 5px;
+  position: fixed;
+  z-index: 1000;
 }
 
 .logo {
@@ -16,5 +21,37 @@ nav button {
 }
 
 main {
+  height: 100%;
+  width: 100%;
+  padding-top: 100px;
   background-color: rgb(85, 85, 85);
+}
+
+.card {
+  height: 400px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100;
+  position: absolute;
+}
+
+#overlay {
+  background-color: rgba(0, 0, 0, 0.588);
+  color: white;
+  padding: 5px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+
+.card:hover #overlay {
+  display: flex;
 }

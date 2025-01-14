@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const key = import.meta.env.VITE_API_KEY;
 
 function HeaderComponent() {
-    const { search, setSearch, setMovies } = useGlobalContext();
+    const { search, setSearch, setMovies, setSeries } = useGlobalContext();
 
     function handleInput(e) {
         const searchValue = e.target.value;
@@ -24,6 +24,24 @@ function HeaderComponent() {
             .then((res) => {
                 console.log(res);
                 setMovies(res.data.results);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                console.log("finally");
+            })
+
+        axios
+            .get(apiUrl + "/search/tv", {
+                params: {
+                    api_key: key,
+                    query: search
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                setSeries(res.data.results);
             })
             .catch((error) => {
                 console.log(error);

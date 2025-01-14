@@ -1,16 +1,36 @@
+import axios from "axios";
 import { useGlobalContext } from "../contexts/GlobalContext";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+const key = import.meta.env.VITE_API_KEY;
+
 function HeaderComponent() {
-    const { search, setSearch } = useGlobalContext();
+    const { search, setSearch, setMovies } = useGlobalContext();
 
     function handleInput(e) {
         const searchValue = e.target.value;
         setSearch(searchValue);
     }
 
-    function handleSearch(e) {
+    const handleSearch = (e) => {
         e.preventDefault();
-        setSearch("");
+        axios
+            .get(apiUrl + "/search/movie", {
+                params: {
+                    api_key: key,
+                    query: search
+                }
+            })
+            .then((res) => {
+                console.log(res);
+                setMovies(res.data.results);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                console.log("finally");
+            })
     }
 
     return (

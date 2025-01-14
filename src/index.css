@@ -14,3 +14,7 @@ nav button {
   background-color: rgb(255, 0, 0);
   color: white;
 }
+
+main {
+  background-color: rgb(85, 85, 85);
+}

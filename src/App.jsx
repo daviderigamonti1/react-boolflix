@@ -1,6 +1,7 @@
 import { GlobalProvider } from "./contexts/GlobalContext";
 
 import HeaderComponent from "./components/HeaderComponent";
+import MainComponent from "./components/MainComponent";
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <GlobalProvider>
         <HeaderComponent />
+        <MainComponent />
       </GlobalProvider>
     </>
   )

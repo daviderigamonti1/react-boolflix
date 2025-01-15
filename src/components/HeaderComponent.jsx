@@ -1,11 +1,7 @@
-import axios from "axios";
 import { useGlobalContext } from "../contexts/GlobalContext";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-const key = import.meta.env.VITE_API_KEY;
-
 function HeaderComponent() {
-    const { search, setSearch, setMovies, setSeries } = useGlobalContext();
+    const { search, setSearch, getData } = useGlobalContext();
 
     function handleInput(e) {
         const searchValue = e.target.value;
@@ -14,41 +10,9 @@ function HeaderComponent() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        axios
-            .get(apiUrl + "/search/movie", {
-                params: {
-                    api_key: key,
-                    query: search
-                }
-            })
-            .then((res) => {
-                console.log(res);
-                setMovies(res.data.results);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                console.log("finally");
-            })
 
-        axios
-            .get(apiUrl + "/search/tv", {
-                params: {
-                    api_key: key,
-                    query: search
-                }
-            })
-            .then((res) => {
-                console.log(res);
-                setSeries(res.data.results);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                console.log("finally");
-            })
+        getData(search, "movie");
+        getData(search, "tv")
     }
 
     return (

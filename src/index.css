@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(85, 85, 85);
+}
+
 header {
   width: 100%;
   top: 0;
@@ -24,7 +28,6 @@ main {
   height: 100%;
   width: 100%;
   padding-top: 100px;
-  background-color: rgb(85, 85, 85);
 }
 
 .card {
@@ -37,9 +40,40 @@ main {
   position: absolute;
 }
 
+.nobar::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.scroll-button {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 30px;
+}
+
+.left {
+  left: -10px;
+}
+
+.right {
+  right: -10px;
+}
+
 #overlay {
   background-color: rgba(0, 0, 0, 0.588);
   color: white;
+  height: 400px;
   padding: 5px;
   position: relative;
   top: 0px;
@@ -49,7 +83,7 @@ main {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .card:hover #overlay {

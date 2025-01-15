@@ -24,7 +24,7 @@ function MediaListComponent({ mediaType }) {
 
     return (
         <section className="position-relative">
-            <h3 className="p-3 text-white">{mediaType === "movies" ? "Movie" : "Serie"}</h3>
+            <h3 className="text-white">{mediaType === "movies" ? "Movie" : "Serie"}</h3>
             <div className="row py-4 flex-nowrap overflow-x-scroll nobar" ref={myRef}>
                 {mediaData.map((media) => (
                     <div className="col-12 col-md-6 col-lg-3" key={media.id}>

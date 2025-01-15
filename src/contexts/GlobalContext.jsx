@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
     const [series, setSeries] = useState([]);
     const [search, setSearch] = useState([]);
+    const [cast, setCast] = useState([]);
 
     function getData(query, endpoint) {
         axios
@@ -23,8 +24,49 @@ const GlobalProvider = ({ children }) => {
                 console.log(res);
                 if (endpoint === "movie") {
                     setMovies(res.data.results);
+                    res.data.results.forEach((movie) => {
+                        axios
+                            .get(`${apiUrl}/movie/${movie.id}/credits`, {
+                                params: {
+                                    api_key: key,
+                                }
+                            })
+                            .then((castRes) => {
+                                setCast((prevCast) => [
+                                    ...prevCast,
+                                    { movieId: movie.id, cast: castRes.data.cast }
+                                ]);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                            .finally(() => {
+                                console.log("finally");
+                            })
+                    })
+
                 } else {
-                    setSeries(res.data.results)
+                    setSeries(res.data.results);
+                    res.data.results.forEach((serie) => {
+                        axios
+                            .get(`${apiUrl}/tv/${serie.id}/credits`, {
+                                params: {
+                                    api_key: key,
+                                }
+                            })
+                            .then((castRes) => {
+                                setCast((prevCast) => [
+                                    ...prevCast,
+                                    { seriesId: serie.id, cast: castRes.data.cast }
+                                ]);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                            .finally(() => {
+                                console.log("finally");
+                            })
+                    })
                 }
             })
             .catch((error) => {
@@ -35,7 +77,7 @@ const GlobalProvider = ({ children }) => {
             })
     }
     return (
-        <GlobalContext.Provider value={{ movies, setMovies, series, setSeries, search, setSearch, getData }}>
+        <GlobalContext.Provider value={{ movies, setMovies, series, setSeries, search, setSearch, cast, setCast, getData }}>
             {children}
         </GlobalContext.Provider>
     )
